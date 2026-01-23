@@ -22,7 +22,7 @@ public class Administracio extends Thread {
 
         
         for (int i = 0; i < poblacio_activa.length; i++) {
-           try {
+            try {
                 poblacio_activa[i].join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
