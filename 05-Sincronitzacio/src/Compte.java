@@ -18,7 +18,7 @@ public class Compte {
         return saldo;
     }
     public synchronized void setSaldo(float saldo) {
-        this.saldo = saldo;
+        this.saldo += saldo;
     }
     
 }

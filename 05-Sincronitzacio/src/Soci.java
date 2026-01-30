@@ -20,11 +20,10 @@ public class Soci extends Thread {
     public void run() {
         for (int any = 0; any < maxAnys; any++) {
             for (int i = 1; i <= 12; i++) {
-                if (i % 2 == 0) {
+                if (i % 2 != 0) {
                     compte.setSaldo(aportacio);
                 } else {
                     compte.setSaldo(-aportacio);
-                    
                 }
                 try {
                     Thread.sleep(rnd.nextInt(esperaMax));
