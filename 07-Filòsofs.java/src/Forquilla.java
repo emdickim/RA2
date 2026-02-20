@@ -1,17 +1,19 @@
 public class Forquilla {
-    int numeroForquilles;
+
+
+    int numero;
     private boolean enUs;
 
-    public Forquilla(int numeroForquilles) {
-        this.numeroForquilles = numeroForquilles;
+    public Forquilla(int numero) {
+        this.numero = numero;
     }
 
-        public int getNumeroForquilles() {
-        return numeroForquilles;
+        public int getNumero() {
+        return numero;
     }
 
-    public void setNumeroForquilles(int numeroForquilles) {
-        this.numeroForquilles = numeroForquilles;
+    public void setNumeroForquilles(int numero) {
+        this.numero = numero;
     }
 
     public boolean isEnUs() {
