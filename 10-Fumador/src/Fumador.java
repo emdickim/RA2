@@ -1,11 +1,13 @@
+import java.util.Random;
 
 public class Fumador extends Thread {
-    private static Estanc estanc;
-    private static int id;
+    private final Estanc estanc;
+    private final int id;
+    private final Random rnd = new Random();
     
-    private static Estanc.Tabac tabac;
-    private static Estanc.Paper paper;
-    private static Estanc.Llumi llumi;
+    private Estanc.Tabac tabac;
+    private Estanc.Paper paper;
+    private Estanc.Llumi llumi;
     
     public Fumador(int id, Estanc estanc) {
         this.id = id;
@@ -14,40 +16,42 @@ public class Fumador extends Thread {
 
     int fumades = 0;
 
-    public static void fuma() {
+    public void fuma() {
 
-        if (tabac != null || paper != null || llumi != null) {
-            System.out.printf("Fumador %d", id);
+        
+            System.out.printf("Fumador %d fuma\n", id);
+            
             tabac = null;
             paper = null;
             llumi = null;
+            fumades++;
 
             try {
-                Thread.sleep(500, 1501);
+                Thread.sleep(rnd.nextInt(500, 1502));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+            System.out.println("Fumador " + id + " ha fumat " + (fumades + 1) + " veces");
     }
 
-    public static void compraTabac() {
-        tabac = Estanc.venWinston();
+    public void compraTabac() {
+        tabac = estanc.venWinston();
         if (tabac == null) {
             return;
         }
         System.out.println("Fumador " + id + " compra tabac");
     }
 
-    public static void compraPaper() {
-        paper = Estanc.venPaper();
+    public void compraPaper() {
+        paper = estanc.venPaper();
         if (paper == null) {
             return;
         }
         System.out.println("Fumador " + id + " compra paper");
     }
-    public static void compraLlumi() {
+    public void compraLlumi() {
 
-        llumi = Estanc.venLlumi();
+        llumi = estanc.venLlumi();
         if (llumi == null) {
             return;
         }
@@ -57,18 +61,18 @@ public class Fumador extends Thread {
     @Override
     public void run() {
         while (true) {
-            if (tabac == null) {
-                compraTabac();
-            } else if (paper == null) {
-                 compraPaper();
-            } else if (llumi == null) {
-                compraLlumi();
-            } else {
-                fuma();
-            }
+            
+            compraTabac();
 
-            if (fumades ==3) {
-               break;
+            compraPaper();
+
+            compraLlumi();
+
+            if (tabac != null && paper != null && llumi != null) fuma();
+
+
+            if (fumades == 3) {
+                break;
             }
 
         }
