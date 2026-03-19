@@ -1,16 +1,15 @@
 public class Client {
     
-    private final int nom;
+    private final String nom;
     
     public Client (int id) {
-        this.nom = id;
+        this.nom = "Client-" + id;
     }
-    public int getNom() {
+    public String getNom() {
         return nom;
     }
 
-
-    public static void tallarSeElCabell() {
-        System.out.println("Tallar-se el cabell");
+    public void tallarSeElCabell() {
+        System.out.println("Tallant cabell a " + nom);
     }
 }
